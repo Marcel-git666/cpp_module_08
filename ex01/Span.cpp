@@ -40,13 +40,11 @@ int Span::shortestSpan() const {
         throw Span::NoSpanException();
     std::vector<int> sorted = _numbers;
     std::sort(sorted.begin(), sorted.end());
-    int min = sorted[1] - sorted[0];
+    int minSpan = sorted[1] - sorted[0];
     for (size_t i = 1; i < sorted.size() - 1; i++) {
-        if (sorted[i + 1] - sorted[i] < min) {
-            min = sorted[i + 1] - sorted[i];
-        }
+        minSpan = std::min(minSpan, sorted[i + 1] - sorted[i]);
     }
-    return min;
+    return minSpan;
 }
 
 const char *Span::SpanFullException::what() const throw() {
